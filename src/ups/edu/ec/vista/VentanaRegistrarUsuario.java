@@ -207,10 +207,11 @@ public class VentanaRegistrarUsuario extends javax.swing.JInternalFrame {
         if (cedula.length() != 10 || nombre.isBlank() || apellido.isBlank() || correo.isBlank() || password.isBlank()) {
             JOptionPane.showMessageDialog(this, "Llene todas las casillas para crear un nuevo Usuario");
         } else {
-            controladorUsuario.create(new Usuario(controladorUsuario.cargarCodigo(),
+            var usuario = controladorUsuario.comprobarMayusculas(new Usuario(controladorUsuario.cargarCodigo(),
                     (String) txtFormattedCedula.getValue(),
                     txtNombre.getText(), txtApellido.getText(), txtCorreo.getText(),
                     String.valueOf(txtPassword.getPassword())));
+            controladorUsuario.create(usuario);
             JOptionPane.showMessageDialog(this, "Usuario registrado con exito");
             this.hide();
         }

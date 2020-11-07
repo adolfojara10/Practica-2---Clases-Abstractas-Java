@@ -35,7 +35,8 @@ public class Usuario {
         listaTelefonos = new ArrayList<>();
     }
 
-    public Usuario(String cedula, String nombre, String apellido, String correo, String password, List<Telefono> listaTelefonos) {
+    public Usuario(String cedula, String nombre, String apellido, String correo, String password, 
+            List<Telefono> listaTelefonos) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -43,6 +44,18 @@ public class Usuario {
         this.password = password;
         this.listaTelefonos = listaTelefonos;
     }
+
+    public Usuario(int id, String cedula, String nombre, String apellido, String correo, String password, List<Telefono> listaTelefonos) {
+        this.id = id;
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.password = password;
+        this.listaTelefonos = listaTelefonos;
+    }
+    
+    
 
     public Usuario(String apellido) {
         this.apellido = apellido;

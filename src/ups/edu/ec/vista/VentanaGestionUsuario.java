@@ -214,10 +214,13 @@ public class VentanaGestionUsuario extends javax.swing.JInternalFrame {
         if (nombre.isBlank() || apellido.isBlank() || correo.isBlank() || password.isBlank()) {
             JOptionPane.showMessageDialog(this, "Todas las casillas deben estar llenas");
         } else {
-            var usuarioNuevo = new Usuario(txtCedula.getText(), nombre, apellido, correo, password, usuario.getListaTelefonos());
+            var usuarioNuevo = controladorUsuario.comprobarMayusculas(new Usuario(usuario.getId(), 
+                    txtCedula.getText(), nombre, apellido, correo, password, usuario.getListaTelefonos()));
+            
+            controladorUsuario.update(usuario, usuarioNuevo);
             this.usuario = usuarioNuevo;
-            controladorUsuario.update(usuarioNuevo, usuario);
             llenarDatos();
+            
             JOptionPane.showMessageDialog(this, "Información actualizada con exito");
         }
 

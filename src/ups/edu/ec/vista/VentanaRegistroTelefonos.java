@@ -439,12 +439,21 @@ public class VentanaRegistroTelefonos extends javax.swing.JInternalFrame {
         if (itemSeleccionado.equalsIgnoreCase("Apellido")) {
             String busquedaTexto = txtBusquedaApellido.getText();
             System.out.println(busquedaTexto);
-            Usuario usuario = new Usuario(busquedaTexto.trim());
+
+            String[] apellidos = busquedaTexto.split(" ");
+            String apellidoMayusculas = "";
+            for (String apellido : apellidos) {
+                apellidoMayusculas += String.valueOf(Character.toUpperCase(apellido.charAt(0)));
+                apellidoMayusculas += apellido.substring(1, apellido.length());
+                apellidoMayusculas += " ";
+            }           
+            
+            Usuario usuario = new Usuario(apellidoMayusculas.trim());
             usuario = (Usuario) controladorUsuario.read(usuario);
             if (usuario != null) {
 
                 txtNombre.setText(usuario.getNombre());
-                txtApellido.setText(busquedaTexto);
+                txtApellido.setText(usuario.getApellido());
                 txtCedula.setText(usuario.getCedula());
                 txtCorreo.setText(usuario.getCorreo());
 
@@ -463,7 +472,7 @@ public class VentanaRegistroTelefonos extends javax.swing.JInternalFrame {
             System.out.println(busquedaTexto);
             Usuario usuario = new Usuario();
             usuario.setCedula(busquedaTexto.trim());
-            usuario = (Usuario) controladorUsuario.read(usuario);
+            usuario = (Usuario) controladorUsuario.readCedula(usuario);
             if (usuario != null) {
 
                 txtNombre.setText(usuario.getNombre());
@@ -489,7 +498,7 @@ public class VentanaRegistroTelefonos extends javax.swing.JInternalFrame {
             telefono = (Telefono) controladorTelefono.read(telefono);
             if (telefono != null) {
                 telefono.toString();
-                
+
                 var usuario = controladorUsuario.readNumero(telefono);
                 if (usuario != null) {
                     txtNombre.setText(usuario.getNombre());

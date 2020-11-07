@@ -423,13 +423,13 @@ public class VentanaGestionTelefono extends javax.swing.JInternalFrame {
         String numero = (String) txtFormattedNumero.getValue();
         String tipo = (String) cbxTipo.getSelectedItem();
         String operadora = (String) cbxOperadora.getSelectedItem();
-        Telefono tele = new Telefono(codigo, tipo, numero, operadora);
+        Telefono telefonoActualizado = new Telefono(codigo, tipo, numero, operadora);
 
         if (numero.isEmpty() || tipo.equals("--Seleccione--") || operadora.equals("--Seleccione--"))
             JOptionPane.showMessageDialog(this, "Llene todos los campos para actualizar un teléfono");
         else {
-            controladorTelefono.update(tele, telefono);
-            usuario.actualizarTelefono(tele);
+            controladorTelefono.update(this.telefono, telefonoActualizado);
+            usuario.actualizarTelefono(telefonoActualizado);
             controladorUsuario.update(usuario, usuario);
             JOptionPane.showMessageDialog(this, "Teléfono actualizado con exito");
             llenarTablaTelefono();

@@ -14,7 +14,6 @@ import ups.edu.ec.modelo.Telefono;
  * @author Adolfo
  * @param <T>
  */
-
 public abstract class Controlador<T> {
 
     private List<T> listaGenerica;
@@ -31,7 +30,11 @@ public abstract class Controlador<T> {
     }
 
     public T read(T objetoBuscar) {
-        return listaGenerica.stream().filter(objeto -> objeto.equals(objetoBuscar)).findFirst().get();
+        if (listaGenerica.contains(objetoBuscar)) {
+            return (T) listaGenerica.stream().filter(objeto -> objeto.equals(objetoBuscar)).findFirst().get();
+        } else 
+            return null;
+
     }
 
     public T update(T objetoAntiguo, T objetoNuevo) {
@@ -42,13 +45,11 @@ public abstract class Controlador<T> {
     public boolean delete(T objetoEliminar) {
         return listaGenerica.remove(objetoEliminar);
     }
-    
-    public List<T> findAll(){
+
+    public List<T> findAll() {
         return listaGenerica;
     }
 
     public abstract int cargarCodigo();
-  
-
 
 }
