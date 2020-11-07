@@ -6,7 +6,6 @@
 package ups.edu.ec.vista;
 
 import javax.swing.JOptionPane;
-import ups.edu.ec.controlador.Controlador;
 import ups.edu.ec.controlador.ControladorUsuario;
 import ups.edu.ec.modelo.Usuario;
 

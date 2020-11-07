@@ -7,7 +7,6 @@ package ups.edu.ec.controlador;
 
 import java.util.ArrayList;
 import java.util.List;
-import ups.edu.ec.modelo.Telefono;
 
 /**
  *

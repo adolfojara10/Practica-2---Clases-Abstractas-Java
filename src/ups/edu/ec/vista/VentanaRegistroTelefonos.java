@@ -7,10 +7,8 @@ package ups.edu.ec.vista;
 
 import java.awt.Color;
 import java.util.List;
-import java.util.Optional;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import ups.edu.ec.controlador.Controlador;
 import ups.edu.ec.controlador.ControladorTelefono;
 import ups.edu.ec.controlador.ControladorUsuario;
 import ups.edu.ec.modelo.*;
