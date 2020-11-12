@@ -442,7 +442,7 @@ public class VentanaRegistroTelefonos extends javax.swing.JInternalFrame {
             String apellidoMayusculas = "";
             for (String apellido : apellidos) {
                 apellidoMayusculas += String.valueOf(Character.toUpperCase(apellido.charAt(0)));
-                apellidoMayusculas += apellido.substring(1, apellido.length());
+                apellidoMayusculas += apellido.substring(1, apellido.length()).toLowerCase();
                 apellidoMayusculas += " ";
             }           
             

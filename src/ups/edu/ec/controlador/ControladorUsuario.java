@@ -35,14 +35,14 @@ public class ControladorUsuario extends Controlador {
         String nombreMayusculas = "";
         for (String nombre : nombres) {
             nombreMayusculas += String.valueOf(Character.toUpperCase(nombre.charAt(0))); 
-            nombreMayusculas += nombre.substring(1,nombre.length());
+            nombreMayusculas += nombre.substring(1,nombre.length()).toLowerCase();
             nombreMayusculas += " ";
         }
 
         String apellidoMayusculas = "";
         for (String apellido : apellidos) {
             apellidoMayusculas += String.valueOf(Character.toUpperCase(apellido.charAt(0))); 
-            apellidoMayusculas += apellido.substring(1,apellido.length());
+            apellidoMayusculas += apellido.substring(1,apellido.length()).toLowerCase();
             apellidoMayusculas += " ";
         }
         
