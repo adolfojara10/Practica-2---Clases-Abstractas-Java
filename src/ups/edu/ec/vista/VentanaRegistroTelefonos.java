@@ -433,88 +433,92 @@ public class VentanaRegistroTelefonos extends javax.swing.JInternalFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         String itemSeleccionado = (String) cbxOpcionBusqueda.getSelectedItem();
+        try {
+            if (itemSeleccionado.equalsIgnoreCase("Apellido")) {
+                String busquedaTexto = txtBusquedaApellido.getText();
+                System.out.println(busquedaTexto);
 
-        if (itemSeleccionado.equalsIgnoreCase("Apellido")) {
-            String busquedaTexto = txtBusquedaApellido.getText();
-            System.out.println(busquedaTexto);
-
-            String[] apellidos = busquedaTexto.split(" ");
-            String apellidoMayusculas = "";
-            for (String apellido : apellidos) {
-                apellidoMayusculas += String.valueOf(Character.toUpperCase(apellido.charAt(0)));
-                apellidoMayusculas += apellido.substring(1, apellido.length());
-                apellidoMayusculas += " ";
-            }           
-            
-            Usuario usuario = new Usuario(apellidoMayusculas.trim());
-            usuario = (Usuario) controladorUsuario.read(usuario);
-            if (usuario != null) {
-
-                txtNombre.setText(usuario.getNombre());
-                txtApellido.setText(usuario.getApellido());
-                txtCedula.setText(usuario.getCedula());
-                txtCorreo.setText(usuario.getCorreo());
-
-                if (!usuario.getListaTelefonos().isEmpty()) {
-                    llenarTablaTelefonos(usuario.getListaTelefonos());
-                } else {
-                    JOptionPane.showMessageDialog(this, "El usuario no contiene teléfonos");
-                }
-            } else {
-                //limpiarDatos();
-                JOptionPane.showMessageDialog(this, "Usuario no encontrado");
-            }
-
-        } else if (itemSeleccionado.equalsIgnoreCase("Cédula")) {
-            String busquedaTexto = String.valueOf(txtFormattedBusqueda.getValue());
-            System.out.println(busquedaTexto);
-            Usuario usuario = new Usuario();
-            usuario.setCedula(busquedaTexto.trim());
-            usuario = (Usuario) controladorUsuario.readCedula(usuario);
-            if (usuario != null) {
-
-                txtNombre.setText(usuario.getNombre());
-                txtApellido.setText(usuario.getApellido());
-                txtCedula.setText(usuario.getCedula());
-                txtCorreo.setText(usuario.getCorreo());
-
-                if (!usuario.getListaTelefonos().isEmpty()) {
-                    llenarTablaTelefonos(usuario.getListaTelefonos());
-                } else {
-                    JOptionPane.showMessageDialog(this, "El usuario no contiene teléfonos");
+                String[] apellidos = busquedaTexto.split(" ");
+                String apellidoMayusculas = "";
+                for (String apellido : apellidos) {
+                    apellidoMayusculas += String.valueOf(Character.toUpperCase(apellido.charAt(0)));
+                    apellidoMayusculas += apellido.substring(1, apellido.length()).toLowerCase();
+                    apellidoMayusculas += " ";
                 }
 
-            } else {
-                //limpiarDatos();
-                JOptionPane.showMessageDialog(this, "Usuario no encontrado");
-            }
-
-        } else {
-            String busquedaTexto = String.valueOf(txtFormattedBusqueda.getValue());
-            System.out.println(busquedaTexto);
-            Telefono telefono = new Telefono(busquedaTexto.trim());
-            telefono = (Telefono) controladorTelefono.read(telefono);
-            if (telefono != null) {
-                telefono.toString();
-
-                var usuario = controladorUsuario.readNumero(telefono);
+                Usuario usuario = new Usuario(apellidoMayusculas.trim());
+                usuario = (Usuario) controladorUsuario.read(usuario);
                 if (usuario != null) {
+
                     txtNombre.setText(usuario.getNombre());
                     txtApellido.setText(usuario.getApellido());
                     txtCedula.setText(usuario.getCedula());
                     txtCorreo.setText(usuario.getCorreo());
 
-                    DefaultTableModel modeloTabla = (DefaultTableModel) tblTelefonos.getModel();
-                    modeloTabla.setRowCount(0);
-                    Object[] rowData = {telefono.getCodigo(), telefono.getNumero(), telefono.getTipo(), telefono.getOperadora()};
-                    modeloTabla.addRow(rowData);
-                    tblTelefonos.setModel(modeloTabla);
-
+                    if (!usuario.getListaTelefonos().isEmpty()) {
+                        llenarTablaTelefonos(usuario.getListaTelefonos());
+                    } else {
+                        JOptionPane.showMessageDialog(this, "El usuario no contiene teléfonos");
+                    }
+                } else {
+                    //limpiarDatos();
+                    JOptionPane.showMessageDialog(this, "Usuario no encontrado");
                 }
+
+            } else if (itemSeleccionado.equalsIgnoreCase("Cédula")) {
+                String busquedaTexto = String.valueOf(txtFormattedBusqueda.getValue());
+                System.out.println(busquedaTexto);
+                Usuario usuario = new Usuario();
+                usuario.setCedula(busquedaTexto.trim());
+                usuario = (Usuario) controladorUsuario.readCedula(usuario);
+                if (usuario != null) {
+
+                    txtNombre.setText(usuario.getNombre());
+                    txtApellido.setText(usuario.getApellido());
+                    txtCedula.setText(usuario.getCedula());
+                    txtCorreo.setText(usuario.getCorreo());
+
+                    if (!usuario.getListaTelefonos().isEmpty()) {
+                        llenarTablaTelefonos(usuario.getListaTelefonos());
+                    } else {
+                        JOptionPane.showMessageDialog(this, "El usuario no contiene teléfonos");
+                    }
+
+                } else {
+                    //limpiarDatos();
+                    JOptionPane.showMessageDialog(this, "Usuario no encontrado");
+                }
+
             } else {
-                //limpiarDatos();
-                JOptionPane.showMessageDialog(this, "Teléfono no encontrado");
+                String busquedaTexto = String.valueOf(txtFormattedBusqueda.getValue());
+                System.out.println(busquedaTexto);
+                Telefono telefono = new Telefono(busquedaTexto.trim());
+                telefono = (Telefono) controladorTelefono.read(telefono);
+                if (telefono != null) {
+                    telefono.toString();
+
+                    var usuario = controladorUsuario.readNumero(telefono);
+                    if (usuario != null) {
+                        txtNombre.setText(usuario.getNombre());
+                        txtApellido.setText(usuario.getApellido());
+                        txtCedula.setText(usuario.getCedula());
+                        txtCorreo.setText(usuario.getCorreo());
+
+                        DefaultTableModel modeloTabla = (DefaultTableModel) tblTelefonos.getModel();
+                        modeloTabla.setRowCount(0);
+                        Object[] rowData = {telefono.getCodigo(), telefono.getNumero(), telefono.getTipo(), telefono.getOperadora()};
+                        modeloTabla.addRow(rowData);
+                        tblTelefonos.setModel(modeloTabla);
+
+                    }
+                } else {
+                    //limpiarDatos();
+                    JOptionPane.showMessageDialog(this, "Teléfono no encontrado");
+                }
             }
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Teléfono no encontrado");
         }
 
     }//GEN-LAST:event_btnBuscarActionPerformed
